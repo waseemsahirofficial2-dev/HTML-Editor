@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browser-based HTML find and replace editor">
+  <title>HTML Editor — Find & Replace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>HTML Editor</h1>
+        <p>Find, replace, edit, preview and download HTML files.</p>
+      </div>
+      <div class="top-actions">
+        <button id="openBtn" class="btn secondary">Open HTML</button>
+        <button id="downloadBtn" class="btn primary" disabled>Download HTML</button>
+        <input id="fileInput" type="file" accept=".html,.htm,text/html" hidden>
+      </div>
+    </header>
+
+    <main>
+      <section id="dropZone" class="drop-zone">
+        <div class="drop-icon">↥</div>
+        <h2>Drop an HTML file here</h2>
+        <p>or click to choose a file from your computer</p>
+        <button id="chooseBtn" class="btn primary">Choose HTML File</button>
+        <div id="fileInfo" class="file-info">No file loaded</div>
+      </section>
+
+      <section class="workspace">
+        <div class="panel editor-panel">
+          <div class="panel-header">
+            <div>
+              <strong>HTML Source</strong>
+              <span id="lineInfo" class="muted">0 lines</span>
+            </div>
+            <div class="panel-actions">
+              <button id="formatBtn" class="small-btn">Format</button>
+              <button id="resetBtn" class="small-btn danger" disabled>Reset</button>
+            </div>
+          </div>
+          <textarea id="editor" spellcheck="false" placeholder="Upload an HTML file to start editing..."></textarea>
+        </div>
+
+        <div class="panel search-panel">
+          <div class="panel-header">
+            <strong>Find & Replace</strong>
+          </div>
+
+          <div class="field">
+            <label for="findInput">Find</label>
+            <div class="input-with-action">
+              <input id="findInput" type="text" placeholder="Text to find...">
+              <button id="findPrevBtn" class="icon-btn" title="Previous match">↑</button>
+              <button id="findNextBtn" class="icon-btn" title="Next match">↓</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="replaceInput">Replace with</label>
+            <input id="replaceInput" type="text" placeholder="Replacement text...">
+          </div>
+
+          <div class="options">
+            <label><input id="caseSensitive" type="checkbox"> Case sensitive</label>
+            <label><input id="wholeWord" type="checkbox"> Whole word</label>
+            <label><input id="regexMode" type="checkbox"> Regular expression</label>
+          </div>
+
+          <div class="match-status">
+            <span id="matchCount">0 matches</span>
+            <span id="cursorStatus">Cursor: 0</span>
+          </div>
+
+          <div class="replace-actions">
+            <button id="replaceBtn" class="btn secondary full">Replace</button>
+            <button id="replaceAllBtn" class="btn primary full">Replace All</button>
+          </div>
+
+          <div class="search-help">
+            <strong>Tips</strong>
+            <ul>
+              <li>Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to focus Find.</li>
+              <li>Use <kbd>Ctrl</kbd> + <kbd>H</kbd> to focus Replace.</li>
+              <li>Regular expressions support JavaScript regex syntax.</li>
+              <li>Everything runs locally in your browser.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel preview-panel">
+          <div class="panel-header">
+            <div>
+              <strong>Preview</strong>
+              <span class="muted">Rendered HTML</span>
+            </div>
+            <button id="refreshPreviewBtn" class="small-btn">Refresh</button>
+          </div>
+          <iframe id="preview" title="HTML Preview" sandbox="allow-scripts"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>HTML Editor</span>
+      <span>•</span>
+      <span>Client-side only — your file stays on your device.</span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
